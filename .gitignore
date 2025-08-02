@@ -1,0 +1,9 @@
+# Sensitive config
+.env
+*.key
+*.pem
+secrets.*
+course_events.json
+course_events.ics
+*.pdf
+
