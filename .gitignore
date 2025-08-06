@@ -10,3 +10,4 @@ client_secret_key.json
 creds.json
 *.json
 *.ics
+*.pyc
