@@ -6,4 +6,7 @@ secrets.*
 course_events.json
 course_events.ics
 *.pdf
-
+client_secret_key.json
+creds.json
+*.json
+*.ics

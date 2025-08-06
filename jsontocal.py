@@ -1,6 +1,7 @@
-from asyncio import events
+import os
+import json
 import datetime
-import os.path
+import hashlib
 
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
@@ -8,57 +9,66 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
-# If modifying these scopes, delete the file token.json.
-SCOPES = ["https://www.googleapis.com/auth/calendar.readonly"]
+SCOPES = ["https://www.googleapis.com/auth/calendar.events"]
 
+def get_token_filename(email):
+    hashed_email = hashlib.sha256(email.encode()).hexdigest()
+    return f"token_{hashed_email}.json"
+
+def authenticate_user():
+    creds = None
+    email = input("Enter your Google account email: ").strip()
+    token_file = get_token_filename(email)
+
+    if os.path.exists(token_file):
+        creds = Credentials.from_authorized_user_file(token_file, SCOPES)
+
+    if not creds or not creds.valid:
+        if creds and creds.expired and creds.refresh_token:
+            creds.refresh(Request())
+        else:
+            flow = InstalledAppFlow.from_client_secrets_file("credentials.json", SCOPES)
+            creds = flow.run_local_server(port=0)
+
+            # Save token under unique file
+            with open(token_file, "w") as token:
+                token.write(creds.to_json())
+
+    return creds
 
 def main(json_data):
-  """Shows basic usage of the Google Calendar API.
-  Prints the start and name of the next 10 events on the user's calendar.
-  """
-  creds = None
-  # The file token.json stores the user's access and refresh tokens, and is
-  # created automatically when the authorization flow completes for the first
-  # time.
-  if os.path.exists("token.json"):
-    creds = Credentials.from_authorized_user_file("token.json", SCOPES)
-  # If there are no (valid) credentials available, let the user log in.
-  if not creds or not creds.valid:
-    if creds and creds.expired and creds.refresh_token:
-      creds.refresh(Request())
-    else:
-      flow = InstalledAppFlow.from_client_secrets_file(
-          "creds.json", SCOPES
-      )
-      creds = flow.run_local_server(port=0)
-    # Save the credentials for the next run
-    with open("token.json", "w") as token:
-      token.write(creds.to_json())
+    try:
+        creds = authenticate_user()
+        service = build("calendar", "v3", credentials=creds)
 
-  try:
-    service = build("calendar", "v3", credentials=creds)
+        for event_data in json_data:
+            event = {
+                "summary": event_data.get("description", ""),
+                "start": {
+                    "date": event_data.get("date"),
+                    "timeZone": "UTC",
+                },
+                "end": {
+                    "date": event_data.get("date"),
+                    "timeZone": "UTC",
+                },
+            }
 
-    # Call the Calendar API
-    for event_data in json_data:
-      event = {
-        'summary': event_data.get('title', 'No Title'),
-        'description': event_data.get('description', ''),
-        'start': {
-          'dateTime': event_data.get('start_time'),
-          'timeZone': 'UTC',
-        },
-        'end': {
-          'dateTime': event_data.get('end_time'),
-          'timeZone': 'UTC',
-        },
-      }
-      
-      result = service.events().insert(calendarId='primary', body=event).execute()
-      print(f'Event created: {result.get("htmlLink")}')
-  
-  except HttpError as error:
-    print(f"An error occurred: {error}")
+            result = service.events().insert(calendarId="primary", body=event).execute()
+            print(f'✅ Event created: {result.get("htmlLink")}')
 
+    except HttpError as error:
+        print(f"❌ An error occurred: {error}")
 
 if __name__ == "__main__":
-  main()
+    try:
+        with open("course_events.json", "r") as f:
+            json_data = json.load(f)
+    except Exception as e:
+        print(f"❌ Failed to load JSON file: {e}")
+        exit(1)
+
+    try:
+        main(json_data)
+    except Exception as e:
+        print(f"❌ Failed to run Google Calendar integration: {e}")
