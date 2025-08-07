@@ -16,6 +16,8 @@ st.set_page_config(page_title="Syllabus Calendar Extractor", layout="centered")
 # Load OpenAI key
 api_key = st.secrets["openai"]["api_key"]
 client = OpenAI(api_key=api_key)
+with open("client_secret_key.json", "r") as f:
+    client_secret = json.load(f)
 
 VALID_TYPES = {"assignment", "draft", "project", "exam", "presentation", "reading", "reflection", "workshop", "other"}
 
@@ -25,6 +27,7 @@ def get_auth_flow():
     return Flow.from_client_config(
         st.secrets["google"]["client_secret"],
         scopes=["https://www.googleapis.com/auth/calendar.events"],
+        redirect_uri="https://syllabuscalendar.streamlit.app/"  # adjust for production
         redirect_uri="https://syllabuscalendar.streamlit.app/"  # adjust for production
     )
 
