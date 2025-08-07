@@ -28,7 +28,6 @@ def get_auth_flow():
         st.secrets["google"]["client_secret"],
         scopes=["https://www.googleapis.com/auth/calendar.events"],
         redirect_uri="https://syllabuscalendar.streamlit.app/"  # adjust for production
-        redirect_uri="https://syllabuscalendar.streamlit.app/"  # adjust for production
     )
 
 def creds_to_dict(creds):
