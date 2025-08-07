@@ -22,10 +22,11 @@ VALID_TYPES = {"assignment", "draft", "project", "exam", "presentation", "readin
 # --- GOOGLE AUTH ---
 
 def get_auth_flow():
+    client_config = json.loads(st.secrets["google"]["client_secret"])
     return Flow.from_client_config(
-        st.secrets["google"]["client_secret"],
+        client_config,
         scopes=["https://www.googleapis.com/auth/calendar.events"],
-        redirect_uri="https://syllabuscalendar.streamlit.app/"  # adjust for production
+        redirect_uri="https://syllabuscalendar.streamlit.app/"
     )
 
 def creds_to_dict(creds):
