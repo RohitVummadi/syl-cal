@@ -123,7 +123,12 @@ if auth_code:
 if "credentials" not in st.session_state:
     flow = get_auth_flow()
     auth_url, _ = flow.authorization_url(prompt='consent')
-    st.markdown(f"[🔐 Click here to log in to Google Calendar]({auth_url})")
+    st.markdown(
+        f'<div style="text-align:center">'
+        f'<a href="{auth_url}" style="font-size:1.2em;">🔐 Click here to log in to Google Calendar</a>'
+        f'</div>',
+        unsafe_allow_html=True
+    )
     st.stop()
 
 st.write("Upload one or more syllabus PDFs. The app will extract important dates and let you add them to your Google Calendar.")
