@@ -172,7 +172,7 @@ if uploaded_files:
         st.text_input(
             f"Description {i+1}",
             value=event["description"],
-            key=f"desc_{i}
+            key=f"desc_{i}"
         )
         st.text_input(
             f"Date {i+1} (YYYY-MM-DD)",
