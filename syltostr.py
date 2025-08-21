@@ -101,7 +101,10 @@ def save_ics(events):
 
 # --- MAIN UI ---
 
-st.title("📅 Syllabus to Calendar Extractor")
+st.markdown(
+    '<h1 style="text-align:center;">📅 Syllabus to Calendar Extractor</h1>',
+    unsafe_allow_html=True
+)
 
 query_params = st.query_params
 auth_code = query_params.get("code")
