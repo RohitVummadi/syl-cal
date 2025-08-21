@@ -186,6 +186,15 @@ if uploaded_files:
             key=f"type_{i}"
         )
 
+    if st.button("Add event"):
+        new_event = {
+            "description": st.session_state.get(f"desc_{i}", ""),
+            "date": st.session_state.get(f"date_{i}", ""),
+            "type": st.session_state.get(f"type_{i}", ""),
+            "source_file": event.get("source_file", "")
+        }
+        all_events.append(new_event)
+
     if st.button("🔄 Update Events"):
         # Update session state with new values
         for i in range(len(st.session_state.edited_events)):
