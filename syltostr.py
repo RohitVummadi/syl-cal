@@ -155,6 +155,19 @@ if uploaded_files:
         all_events.extend(events)
 
     st.subheader("📋 Extracted Events")
+    edited_events = []
+    for i, event in enumerate(all_events):
+        st.markdown(f"**Event {i+1} from {event.get('source_file', '')}:**")
+        description = st.text_input(f"Description {i+1}", value=event["description"], key=f"desc_{i}")
+        date = st.text_input(f"Date {i+1} (YYYY-MM-DD)", value=event["date"], key=f"date_{i}")
+        type_ = st.selectbox(f"Type {i+1}", options=list(VALID_TYPES), index=list(VALID_TYPES).index(event["type"]) if event["type"] in VALID_TYPES else len(VALID_TYPES)-1, key=f"type_{i}")
+        edited_events.append({
+            "description": description,
+            "date": date,
+            "type": type_,
+            "source_file": event.get("source_file", "")
+        })
+    all_events = edited_events
     st.json(all_events)
 
     json_bytes = json.dumps(all_events, indent=4).encode("utf-8")
