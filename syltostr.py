@@ -155,19 +155,46 @@ if uploaded_files:
         all_events.extend(events)
 
     st.subheader("📋 Extracted Events")
-    edited_events = []
-    for i, event in enumerate(all_events):
+    # Store editable fields in session state for batch update
+    if "edited_events" not in st.session_state:
+        st.session_state.edited_events = [
+            {
+                "description": event["description"],
+                "date": event["date"],
+                "type": event["type"],
+                "source_file": event.get("source_file", "")
+            }
+            for event in all_events
+        ]
+
+    for i, event in enumerate(st.session_state.edited_events):
         st.markdown(f"**Event {i+1} from {event.get('source_file', '')}:**")
-        description = st.text_input(f"Description {i+1}", value=event["description"], key=f"desc_{i}")
-        date = st.text_input(f"Date {i+1} (YYYY-MM-DD)", value=event["date"], key=f"date_{i}")
-        type_ = st.selectbox(f"Type {i+1}", options=list(VALID_TYPES), index=list(VALID_TYPES).index(event["type"]) if event["type"] in VALID_TYPES else len(VALID_TYPES)-1, key=f"type_{i}")
-        edited_events.append({
-            "description": description,
-            "date": date,
-            "type": type_,
-            "source_file": event.get("source_file", "")
-        })
-    all_events = edited_events
+        st.text_input(
+            f"Description {i+1}",
+            value=event["description"],
+            key=f"desc_{i}
+        )
+        st.text_input(
+            f"Date {i+1} (YYYY-MM-DD)",
+            value=event["date"],
+            key=f"date_{i}"
+        )
+        st.selectbox(
+            f"Type {i+1}",
+            options=list(VALID_TYPES),
+            index=list(VALID_TYPES).index(event["type"]) if event["type"] in VALID_TYPES else len(VALID_TYPES)-1,
+            key=f"type_{i}"
+        )
+
+    if st.button("🔄 Update Events"):
+        # Update session state with new values
+        for i in range(len(st.session_state.edited_events)):
+            st.session_state.edited_events[i]["description"] = st.session_state.get(f"desc_{i}", st.session_state.edited_events[i]["description"])
+            st.session_state.edited_events[i]["date"] = st.session_state.get(f"date_{i}", st.session_state.edited_events[i]["date"])
+            st.session_state.edited_events[i]["type"] = st.session_state.get(f"type_{i}", st.session_state.edited_events[i]["type"])
+        st.success("Events updated!")
+
+    all_events = st.session_state.edited_events
     st.json(all_events)
 
     json_bytes = json.dumps(all_events, indent=4).encode("utf-8")
