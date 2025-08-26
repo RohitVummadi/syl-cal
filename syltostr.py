@@ -9,6 +9,7 @@ from google_auth_oauthlib.flow import Flow
 from googleapiclient.discovery import build
 from google.oauth2.credentials import Credentials
 from google.auth.transport.requests import Request
+from datetime import datetime
 
 # --- SETUP ---
 st.set_page_config(page_title="Syllabus Calendar Extractor", layout="centered")
@@ -56,11 +57,15 @@ def extract_pdf_text(file):
     return "".join(page.get_text() for page in doc)
 
 def query_gpt_for_events(syllabus_text):
+    current_year = datetime.now().year
     prompt = (
-        "Extract all assignments, exams, projects, or anything important with due dates from the syllabus. "
-        "For each item, include the class name and professor if available. "
-        "Return as JSON array like: [{\"date\": \"YYYY-MM-DD\", \"description\": \"Final Exam for BIO 101 with Dr. Smith\", \"type\": \"exam\"}]. "
-        "Use ISO date format. Here is the syllabus:\n\n" + syllabus_text
+        f"Extract all assignments, exams, projects, or anything important with due dates from the syllabus. "
+        f"For each item, include the class name and professor if available. "
+        f"Return as JSON array like: "
+        f"[{{\"date\": \"YYYY-MM-DD\", \"description\": \"Final Exam for BIO 101 with Dr. Smith\", \"type\": \"exam\"}}]. "
+        f"Use ISO date format. "
+        f"If the year is not explicitly stated, assume the year is {current_year}. "
+        f"Here is the syllabus:\n\n{syllabus_text}"
     )
     response = client.chat.completions.create(
         model="gpt-4o",
