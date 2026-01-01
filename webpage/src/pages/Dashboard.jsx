@@ -131,12 +131,13 @@ const styles = {
     fontFamily: 'system-ui, -apple-system, sans-serif',
   },
   sidebar: {
-    width: '240px',
+    width: '280px',
     backgroundColor: '#1a1a1a',
     padding: '2rem 0',
     display: 'flex',
     flexDirection: 'column',
     borderRight: '1px solid #2a2a2a',
+    flexShrink: 0,
   },
   logo: {
     display: 'flex',
@@ -206,8 +207,11 @@ const styles = {
   },
   main: {
     flex: 1,
-    padding: '2.5rem 3rem',
+    padding: '3rem 5rem',
     overflowY: 'auto',
+    maxWidth: '1800px',
+    margin: '0 auto',
+    width: '100%',
   },
   header: {
     display: 'flex',
@@ -229,15 +233,16 @@ const styles = {
   },
   statsGrid: {
     display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-    gap: '1.25rem',
+    gridTemplateColumns: 'repeat(3, 1fr)',
+    gap: '2rem',
     marginBottom: '3rem',
   },
   statCard: {
     backgroundColor: 'white',
-    padding: '1.5rem',
-    borderRadius: '8px',
+    padding: '2rem',
+    borderRadius: '12px',
     border: '1px solid #e5e5e5',
+    minHeight: '120px',
   },
   statLabel: {
     fontSize: '0.8125rem',
@@ -265,17 +270,18 @@ const styles = {
   },
   actionsGrid: {
     display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-    gap: '1.25rem',
+    gridTemplateColumns: 'repeat(3, 1fr)',
+    gap: '2rem',
   },
   actionCard: {
     backgroundColor: 'white',
-    padding: '1.75rem',
-    borderRadius: '8px',
+    padding: '2.5rem',
+    borderRadius: '12px',
     border: '1px solid #e5e5e5',
     textAlign: 'left',
     cursor: 'pointer',
     transition: 'all 0.15s',
+    minHeight: '200px',
   },
   actionHeader: {
     display: 'flex',
