@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Syllabus to Calendar</title>
+    <link rel="stylesheet" href="/static/style.css">
+    
+    <!-- FullCalendar standard CSS & JS -->
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Syllabus Calendar Extractor</h1>
+            <p>Upload your PDF syllabus and instantly visualize class events.</p>
+        </header>
+        
+        <main>
+            <section class="upload-section">
+                <form id="upload-form">
+                    <div style="margin-bottom: 1rem;">
+                        <label for="startDate"><strong>First Day of Classes:</strong></label><br>
+                        <input type="date" id="startDate" required>
+                        <p style="font-size: 0.8rem; color: #666; margin-top: 4px;">Used to help estimate dates for weekly assignments (e.g. "Week 2")</p>
+                    </div>
+
+                    <div style="margin-bottom: 1rem;">
+                        <label for="pdfFile"><strong>Upload Syllabus PDF(s):</strong></label><br>
+                        <input type="file" id="pdfFile" accept="application/pdf" multiple required>
+                    </div>
+
+                    <div style="margin-bottom: 1rem;">
+                        <label for="customInstructions"><strong>Custom AI Instructions (Optional):</strong></label><br>
+                        <textarea id="customInstructions" rows="2" style="width: 100%; max-width: 400px; padding: 8px; border: 1px solid #ccc; border-radius: 4px;" placeholder="e.g., 'Make sure to extract all weekly readings' or 'Ignore all discussion posts'"></textarea>
+                    </div>
+                    
+                    <button type="submit" id="submitBtn">Extract Events</button>
+                    <div id="loading" class="hidden">Parsing PDF(s) with AI... this may take a moment.</div>
+                </form>
+            </section>
+            
+            <section id="results-section" class="hidden">
+                <div class="warning-banner" style="background-color: #fff3cd; color: #856404; padding: 15px; border-radius: 5px; margin-bottom: 20px; border: 1px solid #ffeeba;">
+                    <strong>⚠️ Disclaimer:</strong> AI parsing might not be 100% accurate. Some events might be missing or listed on the wrong dates. Please double-check against your actual syllabus and use the forms below to fix anything!
+                </div>
+
+                <div class="actions">
+                    <button id="downloadBtn" class="download-btn">⬇️ Download .ICS File</button>
+                </div>
+                
+                <div class="events-summary">
+                    <h3>Extracted Events Summary</h3>
+                    <ul id="events-list"></ul>
+                </div>
+
+                <div class="add-event-box">
+                    <h3>Add Custom Event</h3>
+                    <form id="add-event-form">
+                        <input type="text" id="eventName" placeholder="Event Name (e.g., Midterm Exam)" required>
+                        <input type="date" id="eventDate" required>
+                        <input type="time" id="eventTime" title="Optional Time">
+                        <select id="eventType">
+                            <option value="exam">Exam</option>
+                            <option value="assignment">Assignment</option>
+                            <option value="project">Project</option>
+                            <option value="reading">Reading</option>
+                            <option value="presentation">Presentation</option>
+                            <option value="other">Other</option>
+                        </select>
+                        <button type="submit" class="add-btn">Add to Calendar</button>
+                    </form>
+                </div>
+
+                <div id="calendar"></div>
+            </section>
+        </main>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
