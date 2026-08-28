@@ -1,0 +1,155 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-20T00:00:00.000Z",
+  "title": "Design System: Syl-Cal",
+  "extensions": {
+    "colorMeta": {
+      "page-cool": {
+        "role": "neutral",
+        "displayName": "Cool Page",
+        "canonical": "#f8fafc",
+        "tonalRamp": ["#1a202c", "#334155", "#475569", "#64748b", "#94a3b8", "#cbd5e1", "#e2e8f0", "#f8fafc"]
+      },
+      "surface-white": {
+        "role": "neutral",
+        "displayName": "Surface White",
+        "canonical": "#ffffff",
+        "tonalRamp": ["#1a202c", "#334155", "#475569", "#64748b", "#94a3b8", "#cbd5e1", "#f8fafc", "#ffffff"]
+      },
+      "ink-deep": {
+        "role": "neutral",
+        "displayName": "Deep Ink",
+        "canonical": "#1a202c",
+        "tonalRamp": ["#0a0a0a", "#1a202c", "#2d3748", "#4a5568", "#718096", "#a0aec0", "#cbd5e1", "#f8fafc"]
+      },
+      "ink-strong": {
+        "role": "neutral",
+        "displayName": "Strong Ink",
+        "canonical": "#0a0a0a",
+        "tonalRamp": ["#000000", "#0a0a0a", "#1a202c", "#2d3748", "#4a5568", "#718096", "#cbd5e1", "#f8fafc"]
+      },
+      "ink-muted": {
+        "role": "neutral",
+        "displayName": "Muted Slate",
+        "canonical": "#718096",
+        "tonalRamp": ["#1a202c", "#2d3748", "#4a5568", "#718096", "#94a3b8", "#a0aec0", "#cbd5e1", "#f8fafc"]
+      },
+      "line-soft": {
+        "role": "neutral",
+        "displayName": "Soft Line",
+        "canonical": "#e2e8f0",
+        "tonalRamp": ["#1a202c", "#334155", "#475569", "#64748b", "#94a3b8", "#cbd5e1", "#e2e8f0", "#f8fafc"]
+      },
+      "action-blue": {
+        "role": "primary",
+        "displayName": "Student-Friendly Blue",
+        "canonical": "#3b82f6",
+        "tonalRamp": ["#172554", "#1e3a8a", "#1d4ed8", "#2563eb", "#3b82f6", "#60a5fa", "#bfdbfe", "#eff6ff"]
+      },
+      "action-blue-deep": {
+        "role": "primary",
+        "displayName": "Action Blue Deep",
+        "canonical": "#2563eb",
+        "tonalRamp": ["#172554", "#1e3a8a", "#1d4ed8", "#2563eb", "#3b82f6", "#60a5fa", "#bfdbfe", "#eff6ff"]
+      },
+      "action-indigo": {
+        "role": "secondary",
+        "displayName": "Quiet Indigo",
+        "canonical": "#6366f1",
+        "tonalRamp": ["#1e1b4b", "#312e81", "#4338ca", "#4f46e5", "#6366f1", "#818cf8", "#c7d2fe", "#eef2ff"]
+      },
+      "success-emerald": {
+        "role": "tertiary",
+        "displayName": "Success Emerald",
+        "canonical": "#059669",
+        "tonalRamp": ["#022c22", "#064e3b", "#047857", "#059669", "#10b981", "#34d399", "#a7f3d0", "#ecfdf5"]
+      },
+      "error-red": {
+        "role": "tertiary",
+        "displayName": "Error Red",
+        "canonical": "#dc2626",
+        "tonalRamp": ["#450a0a", "#7f1d1d", "#b91c1c", "#dc2626", "#ef4444", "#f87171", "#fecaca", "#fef2f2"]
+      }
+    },
+    "typographyMeta": {
+      "display": {"displayName": "Dashboard Display", "purpose": "Orientation and high-level page titles."},
+      "body": {"displayName": "System Body", "purpose": "Concise supporting copy and task guidance."},
+      "label": {"displayName": "Compact Label", "purpose": "Short metadata and dashboard stat labels."}
+    },
+    "shadows": [
+      {"name": "soft-surface-lift", "value": "0 1px 3px rgba(0, 0, 0, 0.1)", "purpose": "Low ambient separation for cards, forms, and upload surfaces."},
+      {"name": "hover-lift", "value": "0 4px 6px rgba(0, 0, 0, 0.1)", "purpose": "Subtle login-card hover response."},
+      {"name": "focus-halo", "value": "0 0 0 3px rgba(59, 130, 246, 0.1)", "purpose": "Visible focus support for blue-accented fields."}
+    ],
+    "motion": [
+      {"name": "state-standard", "value": "all 0.2s ease", "purpose": "Crisp, restrained control and form state changes."},
+      {"name": "upload-state", "value": "all 0.3s ease", "purpose": "Soft transition for the upload drop-zone state."}
+    ],
+    "breakpoints": [
+      {"name": "login-mobile", "value": "480px", "purpose": "Reduce login-card padding and heading size on narrow screens."}
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Blue, full-width action for submitting or beginning the core task.",
+      "html": "<button class=\"ds-btn-primary\">PROCESS SYLLABI</button>",
+      "css": ".ds-btn-primary { width: 100%; background: #3b82f6; color: #ffffff; padding: 12px 24px; border: 0; border-radius: 6px; font: 600 16px/1.4 system-ui, sans-serif; cursor: pointer; transition: all 0.2s ease; } .ds-btn-primary:hover { background: #2563eb; transform: translateY(-1px); box-shadow: 0 4px 6px rgba(59, 130, 246, 0.2); } .ds-btn-primary:focus-visible { outline: 3px solid rgba(59, 130, 246, 0.35); outline-offset: 2px; } .ds-btn-primary:active { transform: translateY(0); }"
+    },
+    {
+      "name": "Secondary Navigation Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Quiet blue navigation action used to return to the dashboard.",
+      "html": "<button class=\"ds-btn-secondary\">← BACK TO DASHBOARD</button>",
+      "css": ".ds-btn-secondary { background: #6366f1; color: #ffffff; padding: 8px 16px; border: 0; border-radius: 6px; font: 500 14px/1.4 system-ui, sans-serif; cursor: pointer; transition: background 0.2s ease; } .ds-btn-secondary:hover { background: #4f46e5; } .ds-btn-secondary:focus-visible { outline: 3px solid rgba(99, 102, 241, 0.28); outline-offset: 2px; }"
+    },
+    {
+      "name": "Email Field",
+      "kind": "input",
+      "refersTo": "input-default",
+      "description": "Familiar floating-label field for email sign-in.",
+      "html": "<label class=\"ds-field\"><input type=\"email\" placeholder=\" \" /><span>Email</span></label>",
+      "css": ".ds-field { position: relative; display: block; } .ds-field input { width: 100%; background: #ffffff; border: 1px solid #d1d5db; border-radius: 6px; padding: 12px 16px; color: #1a202c; font: 400 16px/1.4 system-ui, sans-serif; outline: none; transition: all 0.2s ease; } .ds-field input:focus { border-color: #3b82f6; box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1); } .ds-field span { position: absolute; left: 16px; top: 12px; color: #718096; font: 400 16px/1.4 system-ui, sans-serif; pointer-events: none; transition: all 0.2s ease; background: #ffffff; padding: 0 4px; } .ds-field input:focus + span, .ds-field input:not(:placeholder-shown) + span { top: -8px; color: #3b82f6; font-size: 12px; font-weight: 500; }"
+    },
+    {
+      "name": "Stat Card",
+      "kind": "card",
+      "refersTo": "card-default",
+      "description": "Quiet dashboard summary card for one academic schedule metric.",
+      "html": "<article class=\"ds-stat-card\"><span>ACTIVE COURSES</span><strong>0</strong></article>",
+      "css": ".ds-stat-card { background: #ffffff; padding: 32px; border: 1px solid #e5e5e5; border-left: 4px solid #3b82f6; border-radius: 12px; min-height: 120px; } .ds-stat-card span { display: block; color: #666666; font: 600 13px/1.4 system-ui, sans-serif; letter-spacing: 0.5px; } .ds-stat-card strong { display: block; margin-top: 8px; color: #0a0a0a; font: 700 32px/1 system-ui, sans-serif; letter-spacing: -1px; }"
+    },
+    {
+      "name": "Upload Drop Zone",
+      "kind": "custom",
+      "refersTo": "card-default",
+      "description": "Inviting empty-state surface for selecting one or more PDF syllabi.",
+      "html": "<div class=\"ds-drop-zone\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M7 16a4 4 0 0 1-.88-7.903A5 5 0 0 1 15.9 6L16 6a5 5 0 0 1 1 9.9M15 13l-3-3m0 0-3 3m3-3v12\" /></svg><strong>Drag and drop PDF files here</strong><small>PDF files only</small></div>",
+      "css": ".ds-drop-zone { display: grid; place-items: center; gap: 8px; min-height: 220px; padding: 48px 32px; background: #ffffff; border: 2px dashed #cbd5e1; border-radius: 12px; color: #475569; text-align: center; cursor: pointer; transition: all 0.3s ease; } .ds-drop-zone:hover, .ds-drop-zone:focus-within { border-color: #6366f1; background: #f0f9ff; } .ds-drop-zone svg { width: 64px; height: 64px; fill: none; stroke: #94a3b8; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; } .ds-drop-zone strong { font: 500 18px/1.4 system-ui, sans-serif; } .ds-drop-zone small { color: #94a3b8; font: 400 14px/1.4 system-ui, sans-serif; }"
+    },
+    {
+      "name": "Success Result Panel",
+      "kind": "custom",
+      "refersTo": "card-default",
+      "description": "Concise confirmation after events have been extracted.",
+      "html": "<section class=\"ds-success\"><h3>Processing Complete!</h3><p><strong>Events Extracted:</strong> 15</p><button>DOWNLOAD CALENDAR FILE</button></section>",
+      "css": ".ds-success { padding: 32px; background: #ecfdf5; border-left: 4px solid #10b981; border-radius: 8px; color: #047857; } .ds-success h3 { margin: 0 0 16px; color: #065f46; font: 700 20px/1.4 system-ui, sans-serif; } .ds-success p { margin: 0; font: 400 15px/1.6 system-ui, sans-serif; } .ds-success button { margin-top: 16px; padding: 12px 24px; background: #10b981; color: #ffffff; border: 0; border-radius: 6px; font: 500 14px/1.4 system-ui, sans-serif; cursor: pointer; transition: background 0.2s ease; } .ds-success button:hover { background: #059669; } .ds-success button:focus-visible { outline: 3px solid rgba(5, 150, 105, 0.28); outline-offset: 2px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Calm Academic Utility",
+    "overview": "Syl-Cal is a quiet, practical place for students to upload their syllabi and get a clean calendar of important academic events. The interface should reduce the feeling of administrative work: clear entry points, concise language, and enough structure to make the next action obvious.\n\nThe visual system uses cool neutral surfaces, restrained blue and indigo actions, rounded containers, and softly layered depth. It is welcoming without becoming playful or decorative. The interface should feel student-friendly through clarity and approachability, not through novelty, illustration, or an overfilled palette.",
+    "keyCharacteristics": ["Calm cool-white canvas with clean white working surfaces.", "Friendly blue actions used sparingly for direction and confirmation.", "Crisp, efficient controls with predictable states.", "Softly layered cards and containers that support scanning.", "Concise content and low visual noise."],
+    "rules": [
+      {"name": "The Calm Palette Rule", "body": "Use neutral surfaces as the visual majority. Accent colors should signal action or status, not decorate empty space.", "section": "colors"},
+      {"name": "The One-Next-Step Rule", "body": "A screen should have one unmistakable primary action, with secondary actions visually quieter.", "section": "colors"},
+      {"name": "The Familiar Type Rule", "body": "Keep the system UI stack. Syl-Cal earns trust through clarity and speed, not a branded display face.", "section": "typography"},
+      {"name": "The Soft Landing Rule", "body": "Surfaces should feel inviting at rest. Prefer a pale canvas, a white working area, and one subtle edge or shadow over stacked effects.", "section": "elevation"}
+    ],
+    "dos": ["Do make uploading syllabi and downloading the resulting calendar the clearest actions in the product.", "Do use student-friendly blue as a signal for action, navigation, and progress.", "Do keep copy concise and specific; every sentence should help a student complete the task.", "Do preserve generous whitespace and soft surface separation so important dates remain easy to scan.", "Do use semantic green and red only for success and error feedback.", "Do retain visible focus states and clear disabled states."],
+    "donts": ["Don't introduce gradients, decorative illustrations, excessive badges, or busy visual effects that compete with the calendar workflow.", "Don't use multiple bright accent colors on one screen when one action color can establish hierarchy.", "Don't turn the product into a generic AI interface with glowing effects, chat-like decoration, or abstract automation imagery.", "Don't add density or feature chrome that makes a simple upload-to-calendar task feel like a project-management suite.", "Don't hide the primary action inside a menu or behind ambiguous icon-only controls."]
+  }
+}

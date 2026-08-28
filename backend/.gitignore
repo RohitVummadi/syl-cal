@@ -2,4 +2,6 @@ uploads/
 *.pyc
 __pycache__/
 .env
+*.env
 *.log
+service-account*.json

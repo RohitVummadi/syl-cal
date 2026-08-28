@@ -1,0 +1,26 @@
+.app-shell { display: flex; min-height: 100vh; background: #f8fafc; }
+.app-sidebar { width: 240px; flex: 0 0 240px; display: flex; flex-direction: column; padding: 2rem 1rem; background: #1a202c; }
+.app-brand { display: flex; align-items: center; gap: 0.75rem; padding: 0 0.5rem; margin-bottom: 2.5rem; color: #ffffff; font-size: 1.125rem; font-weight: 700; text-decoration: none; }
+.app-brand-mark { display: grid; width: 36px; height: 36px; place-items: center; border-radius: 8px; background: #3b82f6; color: #ffffff; font-size: 0.875rem; font-weight: 800; letter-spacing: -0.03em; }
+.app-nav { display: grid; gap: 0.25rem; flex: 1; }
+.app-nav-link, .app-sign-out { min-height: 44px; border-radius: 6px; color: #cbd5e1; font-size: 0.9375rem; font-weight: 600; }
+.app-nav-link { display: flex; align-items: center; padding: 0.75rem 1rem; text-decoration: none; }
+.app-nav-link:hover, .app-nav-link:focus-visible { color: #ffffff; background: #263548; }
+.app-nav-link.is-active { color: #ffffff; background: #334155; }
+.app-sign-out { width: 100%; border: 1px solid #475569; background: transparent; cursor: pointer; }
+.app-sign-out:hover { border-color: #94a3b8; color: #ffffff; }
+
+@media (max-width: 720px) {
+  .app-shell { display: block; }
+  .app-sidebar { width: auto; min-height: auto; flex-direction: row; align-items: center; gap: 0.5rem; padding: 0.75rem 1rem; }
+  .app-brand { margin: 0 auto 0 0; padding: 0; }
+  .app-nav { display: flex; flex: initial; gap: 0.25rem; }
+  .app-nav-link { padding: 0.625rem 0.75rem; font-size: 0.8125rem; }
+  .app-sign-out { width: auto; padding: 0.625rem 0.75rem; font-size: 0.8125rem; }
+}
+
+@media (max-width: 500px) {
+  .app-sidebar { flex-wrap: wrap; }
+  .app-brand { width: 100%; }
+  .app-nav { flex: 1; }
+}

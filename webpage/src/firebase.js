@@ -1,18 +1,19 @@
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyARpxIwkTGdEWYXeKrm1PKwOwuyal5Ek-Y",
-  authDomain: "syl-cal.firebaseapp.com",
-  projectId: "syl-cal",
-  storageBucket: "syl-cal.firebasestorage.app",
-  messagingSenderId: "100134718828",
-  appId: "1:100134718828:web:23583dfef07c90f20db749",
-  measurementId: "G-SKYBELHNM3"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
 };
+
+if (Object.values(firebaseConfig).slice(0, 6).some((value) => !value)) {
+  throw new Error('Firebase configuration is missing. Copy .env.example to .env and fill in the values.');
+}
 
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
-
-export const analytics = getAnalytics(app);

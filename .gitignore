@@ -1,5 +1,6 @@
 # Sensitive config
 .env
+*.env
 *.key
 *.pem
 secrets.*
@@ -8,6 +9,14 @@ course_events.ics
 *.pdf
 client_secret_key.json
 creds.json
-*.json
+service-account*.json
 *.ics
 *.pyc
+__pycache__/
+.venv/
+backend/.venv/
+backend/.venv311/
+node_modules/
+webpage/.vite/
+backend/uploads/
+secrets/

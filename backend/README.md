@@ -1,61 +1,32 @@
-# Syl-Cal Backend API
+# Syl-Cal backend
 
-Backend server for processing syllabus PDFs and extracting calendar events.
+The Flask API extracts dated syllabus events with Gemini and returns a private ICS calendar for the signed-in Firebase user.
 
-## Setup
+## Local setup
 
-1. **Install Python dependencies:**
-   ```bash
-   pip install -r requirements.txt
-   ```
+From the project root, create and use the supported Python environment:
 
-2. **Set your OpenAI API key:**
-   
-   **Windows (PowerShell):**
-   ```powershell
-   $env:OPENAI_API_KEY = "your-api-key-here"
-   ```
-   
-   **Mac/Linux:**
-   ```bash
-   export OPENAI_API_KEY="your-api-key-here"
-   ```
-
-3. **Run the server:**
-   ```bash
-   python app.py
-   ```
-
-The server will start on `http://localhost:5000`
-
-## API Endpoints
-
-### POST /api/process-syllabi
-Upload and process PDF syllabi files.
-
-**Request:**
-- Content-Type: `multipart/form-data`
-- Body: Multiple PDF files
-
-**Response:**
-```json
-{
-  "success": true,
-  "eventCount": 15,
-  "filesProcessed": 3,
-  "calendarUrl": "/api/download/syllabi_calendar_20231231_120000.ics",
-  "events": [...]
-}
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r backend/requirements.txt
 ```
 
-### GET /api/download/:filename
-Download the generated calendar file.
+Copy `.env.example` to `.env`, set `GEMINI_API_KEY`, and set `FIREBASE_SERVICE_ACCOUNT_PATH` to an absolute path for a Firebase Admin service-account JSON file. Keep that JSON file outside Git.
 
-### GET /api/health
-Health check endpoint.
+Start the API:
 
-## Troubleshooting
+```bash
+cd backend
+python app.py
+```
 
-- Make sure `OPENAI_API_KEY` is set in your environment
-- Ensure the `python` folder with `syltostr.py` is in the parent directory
-- Check that all dependencies are installed: `pip install -r requirements.txt`
+It runs at `http://127.0.0.1:5000`. The public health check is `GET /api/health`; uploads and downloads require a Firebase ID token in `Authorization: Bearer <token>`.
+
+For production, keep `FLASK_DEBUG=0` and run from the project root with:
+
+```bash
+gunicorn --chdir backend --bind 0.0.0.0:5000 app:app
+```
+
+Generated calendars are private to their creator and expire after 24 hours.
